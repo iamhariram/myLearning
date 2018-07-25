@@ -1,0 +1,1 @@
+default["pci"]["in_scope"] = "of_scope"

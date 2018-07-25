@@ -9,6 +9,6 @@
 #end
 
 template "/etc/motd" do
-    source "motd.erd"
+    source "motd.erb"
     mode "0644"
 end 

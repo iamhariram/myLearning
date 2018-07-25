@@ -1,0 +1,4 @@
+this is the property of <%= node["motd"]["company"] %>
+<% if node["pci"]["in_scope"] -%>
+    this server is <%= node["pci"]["in_scope"] %> of pci
+<% end -%>
