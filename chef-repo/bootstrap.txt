@@ -1,0 +1,1 @@
+knife bootstrap 13.232.77.153 --ssh-user ubuntu --sudo --identity-file .\chef.pem --node-name sunil-chef
