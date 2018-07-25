@@ -12,19 +12,22 @@ service "apache2" do
  end
 
  execute "mv /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf.disabled" do
-  notifies :restart, "service[apache2]"
+  only_if do
+    File.exist?("/etc/apache2/sites-enabled/000-default.conf")
+  end
+    notifies :restart, "service[apache2]"
  end
 
-node["apache"]["sites"].each do |site_name, site_data|
+ node["apache"]["sites"].each do |site_name, site_data|
     document_root="/etc/apache2/sites-enabled/#{site_name}"
 
- file "/etc/apache2/sites-enabled/#{site_name}.conf" do
+ template "#{document_root}.conf" do
    source "custom.erb"
     mode "0644"
-    variables (
+    variables ({
         :document_root => document_root,
         :port => site_data["port"]
-    )
+    })
 
     notifies :restart, "service[apache2]"
  end
@@ -37,9 +40,9 @@ node["apache"]["sites"].each do |site_name, site_data|
  template "#{document_root}/index.html" do
     source "index.html.erb"
     mode "0644"
-    variables (
+    variables ({
         :site_name => site_name,
         :port => site_data["port"]
-    )
+    })
     end
 end 
