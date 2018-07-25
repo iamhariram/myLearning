@@ -1,0 +1,8 @@
+{
+    "id": "frank",
+    "commmnet": "frank belson",
+    "uid": 2001,
+    "gid":0,
+    "home":"/home/frank",
+    "shell": "/bin/sh"
+}
